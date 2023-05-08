@@ -3,6 +3,10 @@ import React from 'react';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faGear, faCalendar, faClock, faCity, faTemperature1, faWind, faSun, faCheck } from '@fortawesome/free-solid-svg-icons';
 
+import Loading from './mainComponents/loading';
+import LoadingEnd from './mainComponents/loadingend';
+import BadValue from './mainComponents/badvalue';
+import GoodValue from './mainComponents/goodvalue'
 const Main = () => {
     const [flag, setFlag] = React.useState(true);
     const [valueButton, setValueButton] = React.useState("katowice")
@@ -195,41 +199,10 @@ const Main = () => {
                 <input className="header__submit" type="submit" value="Search!" onClick={handleClick} />
             </form>
             <div className="main__content">
-                {loading ? <div className="main__content-loading"><FontAwesomeIcon className="gear" icon={faGear} /></div> : null}
-                {loadingEnd ? <div className="main__content-loadingEnd">
-                    <FontAwesomeIcon className="gear-end" icon={faGear} />
-                </div> : null}
-                {badValue ? <div className="main__content-badValue">
-                    <h1>Wprowadź prawidłowe dane</h1>
-                </div> : null}
-                {goodValue ? <div className="main__content-weather">
-                    <div className="main__content-weatheritem">
-                        <FontAwesomeIcon icon={faCalendar} className="icon-correct" />
-                        <p>{weather.data_pomiaru}</p>
-                    </div>
-                    <div className="main__content-weatheritem">
-                        <FontAwesomeIcon icon={faClock} className="icon-correct" />
-                        <p>{weather.godzina_pomiaru}</p>
-                    </div>
-                    <div className="main__content-weatheritem">
-                        <FontAwesomeIcon icon={faCity} className="icon-correct" />
-                        <p>{weather.stacja}</p>
-                    </div>
-                    <div className="main__content-weatheritem">
-                        <FontAwesomeIcon icon={faTemperature1} className="icon-correct" />
-                        <p>{weather.temperatura} </p>
-                    </div>
-                    <div className="main__content-weatheritem">
-                        <FontAwesomeIcon icon={faWind} className="icon-correct" />
-                        <p>{weather.predkosc_wiatru} km/h</p>
-                    </div>
-                    <div className="main__content-weatheritem">
-                        <FontAwesomeIcon icon={faSun} className="icon-correct" />
-                        <FontAwesomeIcon icon={faCheck} className="icon-correct-second" />
-                    </div>
-
-
-                </div> : null}
+                <Loading statusloading={loading} />
+                <LoadingEnd statusloadingend={loadingEnd} />
+                <BadValue statusbadvalue={badValue} />
+                <GoodValue statusgoodvalue={goodValue} weatherinfo={weather} />
             </div>
 
         </div >
